@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="plantillas/plantillaCssScript :: headCssScript"></head>
+
+
+  <body>
+    <section th:replace="plantillas/plantillaGeneral :: navbar"></section>
+    
+    <div th:object="${cliente}" th:remove="tag">
+      <ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+        <li th:each="error : ${#fields.errors('*')}">[[${error}]]</li>
+      </ul>
+    </div>
+    
+    <section id="formularioAgregarCliente">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 mx-auto">
+            <form th:action="@{/cliente/guardarCliente}" method="post" th:object="${cliente}">
+
+              <input type="hidden" th:field="*{idCliente}"/>
+
+              <div class="form-group">
+                <label for="nombre">[[#{cliente.nombre}]]</label>
+                <input type="text" class="form-control" id="nombre" aria-describedby="nombreHelp" th:field="*{nombre}" th:errorClass="'form-control alert-danger'">
+                <small id="nombreHelp" class="form-text text-muted">[[#{form.nombreHelp}]]</small>
+                <small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="apellido">[[#{cliente.apellido}]]</label>
+                <input type="text" class="form-control" id="apellido" aria-describedby="apellidoHelp" th:field="*{apellido}" th:errorClass="'form-control alert-danger'">
+                <small id="apellidoHelp" class="form-text text-muted">[[#{form.apellidoHelp}]]</small>
+                <small th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="text-danger"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="email">[[#{cliente.email}]]</label>
+                <input type="text" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}" th:errorClass="'form-control alert-danger'">
+                <small id="emailHelp" class="form-text text-muted">[[#{form.emailHelp}]]</small>
+                <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></small>
+              </div>
+              
+              <div class="form-group">
+                <label for="creadoEn">[[#{cliente.creadoEn}]]</label>
+                <input type="date" class="form-control" id="creadoEn" aria-describedby="creadoEnHelp" th:field="*{creadoEn}" th:errorClass="'form-control alert-danger'">
+                <small id="creadoEnHelp" class="form-text text-muted">[[#{form.creadoEnHelp}]]</small>
+                <small th:if="${#fields.hasErrors('creadoEn')}" th:errors="*{creadoEn}" class="text-danger"></small>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+    </section>
+    
+    <section th:replace="plantillas/plantillaGeneral :: footer"></section>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="plantillas/plantillaCssScript :: headCssScript"></head>
+
+  <body>
+    <section th:replace="plantillas/plantillaGeneral :: navbar"></section>
+
+
+    <section id="listadoClientes">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <table class="table table-dark">
+              <thead>
+                <tr class="text-secondary">
+                  <th>[[#{cliente.idCliente}]]</th>
+                  <th>[[#{cliente.nombre}]]</th>
+                  <th>[[#{cliente.apellido}]]</th>
+                  <th>[[#{cliente.email}]]</th>
+                  <th>[[#{cliente.creadoEn}]]</th>
+                  <th>[[#{cliente.opciones}]]</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="cliente: ${listadoClientes}">
+                  <td>[[${cliente.idCliente}]]</td>
+                  <td>[[${cliente.nombre}]]</td>
+                  <td>[[${cliente.apellido}]]</td>
+                  <td>[[${cliente.email}]]</td>
+                  <td>[[${cliente.creadoEn}]]</td>
+                  <td>
+                    <a th:href="@{/cliente/editarCliente}+'/'+${cliente.idCliente}">[[#{menu.editar}]]</a>
+                    <a th:href="@{/cliente/eliminarCliente}+'/'+${cliente.idCliente}">[[#{menu.eliminar}]]</a>
+
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <nav th:replace="plantillas/paginatorNav :: paginator"></nav>
+    
+    <section th:replace="plantillas/plantillaGeneral :: footer"></section>
+
+
+  </body>
+</html>

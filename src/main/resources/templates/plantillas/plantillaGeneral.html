@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<title>Plantillas Generales.</title>
+
+<section th:fragment="navbar">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">[[#{titulo.aplicacion}]]</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/cliente/listadoClientes}">[[#{titulo.inicio}]]</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" th:href="@{/cliente/formularioAgregarCliente}">[[#{titulo.agregarCliente}]] <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="alert-success" th:if="${success != null}"> [[${success}]] </div>
+  <div class="alert-warning" th:if="${warning != null}"> [[${warning}]] </div>
+  <div class="alert-danger" th:if="${danger != null}">[[${danger}]] </div>
+  <div class="alert-info" th:if="${info != null}">[[${info}]] </div>
+</section>
+
+<section th:fragment="footer">
+  
+<footer class="page-footer font-small blue pt-4">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Derechos Reservados:
+    <a href="https://danielmanriquez.github.io/"> Daniel Manriquez</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+
+</section>
