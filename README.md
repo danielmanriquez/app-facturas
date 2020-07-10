@@ -1,8 +1,21 @@
-# Ejemplo de paginacion simple con JpaRepository
+# Aplicacion para gestionar facturas a clientes .
+### SpringBoot , Thymeleaf , Jpa , RestService , Textos dinamicos , Bootstrap4 , AJAX(Jquery).
 
-## Proyecto simple de un crud desde una base embebida h2
 
-## Codigo 100% reutilizable ya que la clase PageRender es generica.
+Sistema de Gestion de facturas a clientes .
 
-## Compilar con algun ide que tenga instalado spring boot tools
+1. Creacion de clientes .
+2. Listado de clientes con paginacion . 
+3. Actualizacion de datos de cliente .
+4. Añadir facturas a cliente .
+
+
+
+# Instalacion :
+1. - Para Correr con la base de datos h2 embebida , comentar la conexion Mysql en el archivo properties.
+2. - Compilar con algun ide que tenga instalado SpringBoot tools.
+3. - Con el terminal en la carpeta target del proyecto ejecutar con java -jar [archivocompilado]
+
+
+
 

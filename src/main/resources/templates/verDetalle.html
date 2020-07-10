@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="plantillas/plantillaCssScript :: headCssScript">
+    <title>VER DETALLE CLIENTE</title>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+
+    <section th:replace="plantillas/plantillaGeneral :: navbar"></section>
+
+    <section id ="detalleCliente">
+
+      <div class="container">
+        <div class="card bg-light">
+          
+          <div class="card-header">[[#{titulo.ver}]]</div>
+          <div class="card-body">
+            <h4><a th:href="@{/factura/formularioFactura}+'/'+${cliente.idCliente}" class="btn btn-primary">[[#{menu.factura}]]</a></h4>
+            <img th:if="${#strings.length(cliente.foto) > 0}" class="img-thumbnail rounded float-left" style="max-width: 25%;" th:src="@{'/cliente/uploads/' + ${cliente.foto}}" th:alt="${cliente.nombre}"/>
+
+            <ul class="list-group">
+              <li class="list-group-item">[[${cliente.nombre}]]</li>
+              <li class="list-group-item">[[${cliente.apellido}]]</li>
+              <li class="list-group-item">[[${cliente.email}]]</li>
+              <li class="list-group-item">[[${cliente.fechaCreacion}]]</li>
+
+
+            </ul>
+
+            <div class="alert alert-info my-4" th:text="'No hay facturas para este cliente ' + ${cliente.nombre}" th:if="${#lists.isEmpty(cliente.facturas)}"></div>
+
+            <table th:if="${not #lists.isEmpty(cliente.facturas)}" class="table table-border table-striped my4">
+              <thead class="thead-inverse thead-dark">
+                <tr>
+                  <th>[[#{factura.folio}]]</th>
+                  <th>[[#{factura.descripcion}]]</th>
+                  <th>[[#{factura.fecha}]]</th>
+                  <th>[[#{factura.total}]]</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="factura: ${cliente.facturas}">
+
+                  <td>[[${factura.idFactura}]]</td>
+                  <td>[[${factura.descripcion}]]</td>
+                  <td>[[${factura.fechaCreacion}]]</td>
+                  <td>[[${factura.total}]]</td>
+
+                </tr>
+              </tbody>
+
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section th:replace="plantillas/plantillaGeneral :: footer"></section>
+
+  </body>
+</html>

@@ -23,14 +23,18 @@
               </thead>
               <tbody>
                 <tr th:each="cliente: ${listadoClientes}">
-                  <td>[[${cliente.idCliente}]]</td>
+                  <td>
+                    <a th:href="@{/cliente/verDetalle}+'/'+${cliente.idCliente}" class="btn btn-primary btn-xs">[[${cliente.idCliente}]]</a>
+                  </td>
                   <td>[[${cliente.nombre}]]</td>
                   <td>[[${cliente.apellido}]]</td>
                   <td>[[${cliente.email}]]</td>
-                  <td>[[${cliente.creadoEn}]]</td>
+                  <td>[[${cliente.fechaCreacion}]]</td>
                   <td>
-                    <a th:href="@{/cliente/editarCliente}+'/'+${cliente.idCliente}">[[#{menu.editar}]]</a>
-                    <a th:href="@{/cliente/eliminarCliente}+'/'+${cliente.idCliente}">[[#{menu.eliminar}]]</a>
+                    
+                    <a th:href="@{/factura/formularioFactura}+'/'+${cliente.idCliente}" class="badge badge-warning">[[#{menu.factura}]]</a>
+                    <a th:href="@{/cliente/editarCliente}+'/'+${cliente.idCliente}" class="badge badge-info">[[#{menu.editar}]]</a>
+                    <a th:href="@{/cliente/eliminarCliente}+'/'+${cliente.idCliente}" class="badge badge-danger">[[#{menu.eliminar}]]</a>
 
                   </td>
                 </tr>

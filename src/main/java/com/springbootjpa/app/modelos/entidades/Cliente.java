@@ -1,25 +1,32 @@
 package com.springbootjpa.app.modelos.entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+@AllArgsConstructor
 @Data
 @Entity
 @Table(name = "clientes")
@@ -46,16 +53,33 @@ public class Cliente implements Serializable {
     @Column(name = "email")
     private String email;
     
-    @NotNull
-    @Column(name = "creado_en")
+    @Column(name = "fecha_creacion")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date creadoEn;
+    private Date fechaCreacion;
+    
+    @Column(name = "foto")
+    private String foto;
+    
+    @OneToMany( mappedBy = "cliente" ,fetch = FetchType.LAZY , cascade = CascadeType.ALL) //Relacion Bidireccional con factura
+    private List<Factura> facturas ;
+    
+    public Cliente(){
+    
+        this.facturas= new ArrayList();
+    }
+    
+    public void agregarFactura(Factura factura ){
+    
+        this.facturas.add(factura);
+        
+    }
+    
 
-//     @PrePersist
-//     public void antesDePersistir(){
-//         
-//         creadoEn = new Date();
-//         
-//     }
+    @PrePersist
+     public void antesDePersistir(){
+         
+         fechaCreacion = new Date();
+         
+     }
 }

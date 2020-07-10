@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="plantillas/plantillaCssScript :: headCssScript">
+    <title>FORMULARIO FACTURA</title>
+  </head>
+
+  <body>
+    <section th:replace="plantillas/plantillaGeneral :: navbar"></section>
+
+    <section id="formularioFactura">
+      <div class="container py-4">
+
+        <div class="card">
+          <div class="card-header">[[#{titulo.factura}]]</div>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a th:href="@{/cliente/verDetalle}+'/'+${factura.cliente.idCliente}" class="btn btn-success">[[#{menu.volver}]]</a>
+
+            </h4>
+            <form th:action="@{/factura/guardarFactura}" th:object="${factura}" method="post">
+
+
+              <div class="form-group row">
+
+                <label for="cliente" class="col-sm-2 col-form-label">[[#{cliente.nombre}]]</label>
+                <div class="col-sm-6">
+                  <input th:value="${factura.cliente.nombre} + '  ' + ${factura.cliente.apellido} " disabled="disabled" class="form-control"/>
+                </div>
+              </div>
+              <div class="form-group row">
+
+                <label for="descripcion" class="col-sm-2 col-form-label">[[#{factura.descripcion}]]</label>
+                <div class="col-sm-6">
+                  <input type="text" th:field="*{descripcion}" class="form-control"/>
+                </div>
+              </div>
+
+              <div class="form-group row">
+
+                <label for="observacion" class="col-sm-2 col-form-label">[[#{factura.observacion}]]</label>
+                <div class="col-sm-6">
+                  <textarea th:field="*{observacion}" class="form-control"></textarea>
+                </div>
+              </div>
+
+              <div class="form-group row">
+
+                <label for="buscarProducto" class="col-sm-2 col-form-label">[[#{factura.buscarProducto}]]</label>
+                <div class="col-sm-6">
+                  <input type="text" name="buscar_producto" id="buscar_producto" class="form-control"/>
+                </div>
+              </div>
+
+              <section th:replace="factura/plantillaItems :: itemsFactura"></section>
+
+
+              <table id="cargarItemProductos" class="table table-sm table-striped table-hover">
+                
+                <thead>
+                  <tr>
+                    <th>[[#{producto.nombre}]]</th>
+                    <th>[[#{producto.precio}]]</th>
+                    <th>[[#{producto.cantidad}]]</th>
+                    <th>[[#{producto.total}]]</th>
+                    <th>[[#{producto.eliminar}]]</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  
+                </tbody>
+              </table>
+              <h5>[[#{factura.total}]] <span id="gran_total" class="badge badge-secondary">0</span></h5>
+
+
+              <div class="form-group row">
+                <div class="col-sm-6">
+                  <input type="submit" th:value="#{menu.guardar}" class="btn btn-secondary"/>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section th:replace="plantillas/plantillaGeneral :: footer"></section>
+
+  <script th:replace="factura/autocompletar-productos :: autocompletarProductos"></script>
+</body>
+</html>

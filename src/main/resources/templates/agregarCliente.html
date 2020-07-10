@@ -17,7 +17,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-12 mx-auto">
-            <form th:action="@{/cliente/guardarCliente}" method="post" th:object="${cliente}">
+            <form th:action="@{/cliente/guardarCliente}" method="post" th:object="${cliente}" enctype="multipart/form-data">
 
               <input type="hidden" th:field="*{idCliente}"/>
 
@@ -47,6 +47,14 @@
                 <input type="date" class="form-control" id="creadoEn" aria-describedby="creadoEnHelp" th:field="*{creadoEn}" th:errorClass="'form-control alert-danger'">
                 <small id="creadoEnHelp" class="form-text text-muted">[[#{form.creadoEnHelp}]]</small>
                 <small th:if="${#fields.hasErrors('creadoEn')}" th:errors="*{creadoEn}" class="text-danger"></small>
+              </div>
+              
+              <div class="form-group">
+                
+                <label for="file">[[#{cliente.foto}]]</label>
+                <input type="file" name="file" class="form-control"/>
+                
+                
               </div>
 
               <button type="submit" class="btn btn-primary">Guardar</button>
