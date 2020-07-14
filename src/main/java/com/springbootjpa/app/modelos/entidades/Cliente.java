@@ -26,6 +26,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+/**
+ * Clase de Entidad que represanta la tabla "clientes" de la base de datos 
+ * tiene una relacion bidireccional con factura , en la cual un Cliente puede tener muchas Facturas.
+ * 
+ * @author Daniel Manriquez
+ */
 @AllArgsConstructor
 @Data
 @Entity
@@ -61,7 +67,7 @@ public class Cliente implements Serializable {
     @Column(name = "foto")
     private String foto;
     
-    @OneToMany( mappedBy = "cliente" ,fetch = FetchType.LAZY , cascade = CascadeType.ALL) //Relacion Bidireccional con factura
+    @OneToMany( mappedBy = "cliente" ,fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     private List<Factura> facturas ;
     
     public Cliente(){
@@ -69,17 +75,32 @@ public class Cliente implements Serializable {
         this.facturas= new ArrayList();
     }
     
+    /**
+     *Metodo que agrega una factura a la lista de facturas del cliente.
+     * @param factura
+     */
     public void agregarFactura(Factura factura ){
     
         this.facturas.add(factura);
         
     }
     
-
+    /**
+     *Metodo que se ejecuta justo antes de persistir en la base de datos  , le asigna la fecha actual al objeto fechaCreacion y luego lo guarda.
+     * 
+     * 
+     */
     @PrePersist
      public void antesDePersistir(){
          
          fechaCreacion = new Date();
          
      }
+     
+    public String getNombreCompleto(){
+    
+    
+        return this.getNombre() + " " + this.getApellido();
+    }
+     
 }

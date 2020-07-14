@@ -43,10 +43,10 @@
               </div>
               
               <div class="form-group">
-                <label for="creadoEn">[[#{cliente.creadoEn}]]</label>
-                <input type="date" class="form-control" id="creadoEn" aria-describedby="creadoEnHelp" th:field="*{creadoEn}" th:errorClass="'form-control alert-danger'">
-                <small id="creadoEnHelp" class="form-text text-muted">[[#{form.creadoEnHelp}]]</small>
-                <small th:if="${#fields.hasErrors('creadoEn')}" th:errors="*{creadoEn}" class="text-danger"></small>
+                <label for="fechaCreacion">[[#{cliente.fechaCreacion}]]</label>
+                <input type="date" class="form-control" id="fechaCreacion" aria-describedby="fechaCreacionHelp" th:field="*{fechaCreacion}" th:errorClass="'form-control alert-danger'">
+                <small id="fechaCreacionHelp" class="form-text text-muted">[[#{form.fechaCreacionHelp}]]</small>
+                <small th:if="${#fields.hasErrors('fechaCreacion')}" th:errors="*{fechaCreacion}" class="text-danger"></small>
               </div>
               
               <div class="form-group">

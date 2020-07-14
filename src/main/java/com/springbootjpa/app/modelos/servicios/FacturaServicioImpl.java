@@ -27,5 +27,20 @@ public class FacturaServicioImpl implements FacturaServicio {
 
         return this.facturaDao.findById(idFactura).orElse(null);
     }
+    
+    
+    @Transactional
+    @Override
+    public void borrarFacturaPorId(Long idFactura) {
+        
+        this.facturaDao.deleteById(idFactura);
+        
+    }
+
+    @Override
+    public Factura buscarFacturaConClienteConItemsFacturaConProductos(Long id) {
+        
+        return this.facturaDao.fetchByIDWithClienteWhitItemFacturaWithProducto(id);
+    }
 
 }

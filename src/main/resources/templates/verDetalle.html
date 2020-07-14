@@ -37,6 +37,8 @@
                   <th>[[#{factura.descripcion}]]</th>
                   <th>[[#{factura.fecha}]]</th>
                   <th>[[#{factura.total}]]</th>
+                  <th>[[#{factura.detalle}]]</th>
+                  <th>[[#{factura.eliminar}]]</th>
                 </tr>
               </thead>
               <tbody>
@@ -46,6 +48,14 @@
                   <td>[[${factura.descripcion}]]</td>
                   <td>[[${factura.fechaCreacion}]]</td>
                   <td>[[${factura.total}]]</td>
+                  <td><a th:href="@{'/factura/verFactura/' + ${factura.idFactura}}" class="btn btn-primary">[[#{menu.verDetalle}]]</a></td>
+                  <td>
+                    <a th:href="@{'/factura/borrarFactura/' + ${factura.idFactura}}"
+                       class="btn btn-danger"
+                         onclick="return confirm('Seguro Que desea Eliminar la Factura?');">
+                      [[#{menu.eliminar}]]
+                    </a>
+                  </td>
 
                 </tr>
               </tbody>

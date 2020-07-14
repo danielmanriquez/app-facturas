@@ -8,10 +8,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import javax.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,18 +30,20 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
+
+@RequiredArgsConstructor // para que inyeccion de dependencia
 @Controller
 @Slf4j
 @RequestMapping("/cliente")
 @SessionAttributes("cliente")
 public class ClienteControlador {
 
-    @Autowired
-    @Qualifier("clienteServicioImpl")
-    private ClienteServicio clienteServicio;
+    
+    private final ClienteServicio clienteServicio;
 
-    @Autowired
-    private SubirArchivoServicio subirArchivoServicio;
+
+    private final SubirArchivoServicio subirArchivoServicio;
 
     /**
      * Metodo que retorna la imagen del cliente en un cabecero http , y la
@@ -61,6 +62,7 @@ public class ClienteControlador {
             recurso = this.subirArchivoServicio.cargarImagen(nombreArchivo);
 
         } catch (MalformedURLException ex) {
+            log.info("Hubo un error al cargar la imagen");
              log.info(ex.toString());
         }
 
@@ -69,7 +71,14 @@ public class ClienteControlador {
 
     }
     
-    
+    /**
+     *Metodo Controlador de tipo get que nos redirige hacia la vista para ver el detalle del cliente 
+     * que buscamos por su id.
+     * 
+     * 
+     * @param id
+     * @return String
+     */
     @GetMapping("/verDetalle/{id}")
     public String ver(@PathVariable(value = "id") Long id, Model model, RedirectAttributes flash) {
 
@@ -87,6 +96,13 @@ public class ClienteControlador {
 
     }
 
+    /**
+     *Metodo controlador de tipo GET que redirige hacia la vista con el listado de clientes 
+     * paginable. 
+     * @param page
+     * @param model
+     * @return
+     */
     @GetMapping("/listadoClientes")
     public String listadoClientes(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 
@@ -111,6 +127,14 @@ public class ClienteControlador {
         return "agregarCliente";
     }
 
+    /**
+     *Metodo de tipo POST que guarda un cliente en la base de datos , si este no tiene id nulo ,
+     * se creara un nuevo registro ,
+     *Si la variable foto es distinto de nulo actualizara la foto del cliente.
+     * @param cliente
+     * @param foto
+     * @return
+     */
     @PostMapping("/guardarCliente")
     public String guardarCliente(@Valid Cliente cliente,
             BindingResult result,
@@ -119,6 +143,9 @@ public class ClienteControlador {
             @RequestParam("file") MultipartFile foto) {
 
         if (result.hasErrors()) {
+            
+            log.info("Hubo un error de validacion en el formulario cliente.");
+            
             return "agregarCliente";
         }
 
@@ -134,10 +161,12 @@ public class ClienteControlador {
             }
             
             String nombreArchivoUnico = null;
+            
             try {
                 nombreArchivoUnico = this.subirArchivoServicio.copiarImagen(foto);
             } catch (IOException ex) {
                 log.info(ex.toString());
+                log.info("Problemas al subir el archivo ... ");
             }
             
             flash.addFlashAttribute("success", "Has subido correctamente : " + nombreArchivoUnico);
@@ -149,7 +178,7 @@ public class ClienteControlador {
 
         status.setComplete();
 
-        flash.addFlashAttribute("info", "EL CLIENTE HA SIDO GUARDADO CON EXITO.");
+        flash.addFlashAttribute("info", "El cliente ha sido guardado con exito");
 
         return "redirect:/cliente/listadoClientes";
     }

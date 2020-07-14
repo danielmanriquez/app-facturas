@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<html xmlns="http://www.thymeleaf.org">
 <title>Plantillas Generales.</title>
 
 <section th:fragment="navbar">
@@ -25,6 +25,8 @@
   <div class="alert-warning" th:if="${warning != null}"> [[${warning}]] </div>
   <div class="alert-danger" th:if="${danger != null}">[[${danger}]] </div>
   <div class="alert-info" th:if="${info != null}">[[${info}]] </div>
+  <div class="alert-warning" th:if="${error != null}">[[${error}]] </div>
+  
 </section>
 
 <section th:fragment="footer">
@@ -46,3 +48,4 @@
 </footer>
 
 </section>
+</html>

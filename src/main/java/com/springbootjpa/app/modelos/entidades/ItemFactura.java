@@ -20,6 +20,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ *Clase de Entidad que represanta la tabla "items_factura" de la base de datos 
+ * tiene una relacion unidireccional con factura , este objeto solo puede existir en un objeto de tipo Factura
+ * tambien tiene una relacion unidireccional con Producto.
+ * @author Daniel
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -41,7 +47,10 @@ public class ItemFactura implements Serializable {
     @JoinColumn(name="id_producto")
     private Producto producto;
     
-    
+    /**
+     *Metodo que calcula el importe de esta linea de la factura
+     * @return Double
+     */
     public Double calcularImporte(){
     
         return this.cantidad.doubleValue() * producto.getPrecio();

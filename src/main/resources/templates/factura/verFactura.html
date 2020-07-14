@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="plantillas/plantillaCssScript :: headCssScript">
+    <title>VER DETALLE FACTURA</title>
+  </head>
+  <body>
+    <section th:replace="plantillas/plantillaGeneral :: navbar"></section>
+
+    <section id="verFactura">
+      <div class="container py-4">
+        <div class="card">
+          <div class="card-header">[[#{factura.detalle}]]</div>
+          <div class="card-body">
+
+            <h4 class="card-title">
+
+              <a th:href="@{'/cliente/verDetalle/' + ${factura.cliente.idCliente}}">[[#{menu.volver}]]</a>
+
+            </h4>
+
+            <ul class="list-group my-2" id="datosCliente">
+              <li class="list-group-item list-group-item-primary">[[#{cliente.datos}]]</li>
+              <li class="list-group-item">[[${factura.cliente.nombreCompleto}]]</li>
+              <li class="list-group-item">[[${factura.cliente.email}]]</li>
+            </ul>
+
+            <ul class="list-group" id="datosFactura">
+              <li class="list-group-item list-group-item-success">[[#{factura.datos}]]</li>
+              <li class="list-group-item">[[#{factura.folio}]] :  [[${factura.idFactura}]]</li>
+              <li class="list-group-item">[[#{factura.descripcion}]] :  [[${factura.descripcion}]]</li>
+              <li class="list-group-item">[[#{factura.fecha}]] :  [[${factura.fechaCreacion}]]</li>
+
+            </ul>
+            
+            <div class="alert alert-info my-4" th:if="${#lists.isEmpty(factura.itemsFactura)}">[[#{factura.vacia}]]</div>
+            
+            <table th:if="${not #lists.isEmpty(factura.itemsFactura)}" class="table table-striped table-hover table-bordered my-3">
+              <thead>
+                <tr>
+                  <th>[[#{producto.nombre}]]</th>
+                  <th>[[#{producto.precio}]]</th>
+                  <th>[[#{producto.cantidad}]]</th>
+                  <th>[[#{producto.total}]]</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="item : ${factura.itemsFactura}">
+                  <td>[[${item.producto.nombre}]]</td>
+                  <td>[[${item.producto.precio}]]</td>
+                  <td>[[${item.cantidad}]]</td>
+                  <td>[[${item.calcularImporte()}]]</td>
+                  
+                </tr>
+              </tbody>
+              
+            </table>
+            
+            <h5 class="float-rigth">[[#{factura.total}]] <span class="badge badge-secondary">$ [[${factura.total}]]</span></h5>
+            
+            <div class="card border-info mb-4" style="max-width:20rem">
+              <div class="card-header">[[#{factura.observacion}]]</div>
+              <div class="card-body">
+                <p th:if="${not #strings.isEmpty('factura.observacion')}">[[${factura.observacion}]]</p>
+                <p th:if="${#strings.isEmpty('factura.observacion')}">[[#{factura.observacionVacia}]]</p>
+              </div>
+            </div>
+            
+          </div>
+        </div>  
+      </div>      
+    </section>
+
+
+
+
+    <section th:replace="plantillas/plantillaGeneral :: footer"></section>
+
+  </body>
+</html>

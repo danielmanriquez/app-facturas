@@ -27,12 +27,15 @@
                   <input th:value="${factura.cliente.nombre} + '  ' + ${factura.cliente.apellido} " disabled="disabled" class="form-control"/>
                 </div>
               </div>
+
               <div class="form-group row">
 
                 <label for="descripcion" class="col-sm-2 col-form-label">[[#{factura.descripcion}]]</label>
                 <div class="col-sm-6">
-                  <input type="text" th:field="*{descripcion}" class="form-control"/>
+                  <input type="text" th:field="*{descripcion}" class="form-control" th:errorclass="'form-control is-invalid'"/>
                 </div>
+                <small th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="text-danger"></small>
+
               </div>
 
               <div class="form-group row">
@@ -55,7 +58,7 @@
 
 
               <table id="cargarItemProductos" class="table table-sm table-striped table-hover">
-                
+
                 <thead>
                   <tr>
                     <th>[[#{producto.nombre}]]</th>
@@ -63,12 +66,12 @@
                     <th>[[#{producto.cantidad}]]</th>
                     <th>[[#{producto.total}]]</th>
                     <th>[[#{producto.eliminar}]]</th>
-                    
+
                   </tr>
                 </thead>
                 <tbody>
-                  
-                  
+
+
                 </tbody>
               </table>
               <h5>[[#{factura.total}]] <span id="gran_total" class="badge badge-secondary">0</span></h5>

@@ -10,4 +10,8 @@ public interface FacturaServicio {
     
     public Factura buscarFacturaPorId(Long idFactura);
     
+    public void borrarFacturaPorId(Long idFactura);
+    
+    public Factura buscarFacturaConClienteConItemsFacturaConProductos(Long id);
+    
 }
