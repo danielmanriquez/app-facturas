@@ -13,7 +13,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductoServicioImpl implements ProductoServicio {
 
     private final IProductoDAO productoDao;
-
+    
+    
+    @Transactional(readOnly = true)
+    @Override
+    public List<Producto> listarTodosLosProducto() {
+        
+        return this.productoDao.findAll();
+        
+        
+    }
+    
     @Transactional(readOnly = true)
     @Override
     public List<Producto> buscarProductoPorNombre(String nombre) {
@@ -28,5 +38,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         return this.productoDao.findById(id).orElse(null);
 
     }
+
+    
 
 }

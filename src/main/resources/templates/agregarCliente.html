@@ -19,7 +19,7 @@
           <div class="col-xs-12 mx-auto">
             <form th:action="@{/cliente/guardarCliente}" method="post" th:object="${cliente}" enctype="multipart/form-data">
 
-              <input type="hidden" th:field="*{idCliente}"/>
+              <input type="hidden" th:field="*{id}"/>
 
               <div class="form-group">
                 <label for="nombre">[[#{cliente.nombre}]]</label>
@@ -42,12 +42,6 @@
                 <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></small>
               </div>
               
-              <div class="form-group">
-                <label for="fechaCreacion">[[#{cliente.fechaCreacion}]]</label>
-                <input type="date" class="form-control" id="fechaCreacion" aria-describedby="fechaCreacionHelp" th:field="*{fechaCreacion}" th:errorClass="'form-control alert-danger'">
-                <small id="fechaCreacionHelp" class="form-text text-muted">[[#{form.fechaCreacionHelp}]]</small>
-                <small th:if="${#fields.hasErrors('fechaCreacion')}" th:errors="*{fechaCreacion}" class="text-danger"></small>
-              </div>
               
               <div class="form-group">
                 

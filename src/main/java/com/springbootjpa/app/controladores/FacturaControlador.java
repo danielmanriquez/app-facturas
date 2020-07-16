@@ -7,10 +7,13 @@ import com.springbootjpa.app.modelos.entidades.Producto;
 import com.springbootjpa.app.modelos.servicios.ClienteServicio;
 import com.springbootjpa.app.modelos.servicios.FacturaServicio;
 import com.springbootjpa.app.modelos.servicios.ProductoServicio;
+
 import java.util.List;
 import javax.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -75,7 +78,7 @@ public class FacturaControlador {
 
         }
 
-        log.info("Cliente encontrado : " + cliente.getNombre() + " " + cliente.getApellido() + " ID : " + cliente.getIdCliente());
+        log.info("Cliente encontrado : " + cliente.getNombre() + " " + cliente.getApellido() + " ID : " + cliente.getId());
 
         Factura factura = new Factura();
         factura.setCliente(cliente);
@@ -110,7 +113,7 @@ public class FacturaControlador {
         if (error.hasErrors()) {
 
             log.info("Hubo errores de validacion Redirigiendo a formularioFactura");
-            model.addAttribute("error", "Hubo un error de validacion");
+            model.addAttribute("warning", "Hubo un error de validacion");
             return "factura/formularioFactura";
 
         }
@@ -118,7 +121,7 @@ public class FacturaControlador {
         if (itemId == null || itemId.length == 0) {
 
             log.info("La factura esta vacia .");
-            model.addAttribute("warning", "La Factura no contiene items O esta vacia");
+            model.addAttribute("warning", "La Factura no contiene items o esta vacia");
             return "factura/formularioFactura";
 
         }
@@ -142,7 +145,7 @@ public class FacturaControlador {
         flash.addFlashAttribute("success", "Factura añadida con exito al cliente " + factura.getCliente().getNombre());
         status.isComplete();
 
-        return "redirect:/cliente/verDetalle/" + factura.getCliente().getIdCliente();
+        return "redirect:/cliente/verDetalle/" + factura.getCliente().getId();
 
     }
 
@@ -194,7 +197,7 @@ public class FacturaControlador {
             this.facturaServicio.borrarFacturaPorId(id);
             flash.addFlashAttribute("success", "Factura Eliminada Con exito .");
 
-            return "redirect:/cliente/verDetalle/" + factura.getCliente().getIdCliente();
+            return "redirect:/cliente/verDetalle/" + factura.getCliente().getId();
 
         }
         

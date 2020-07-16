@@ -1,0 +1,21 @@
+body{
+    background: url(../images/fondo2.jpg) no-repeat center;
+    background-size: cover;
+    min-height: 100vh;
+  }
+
+
+  body .navbar{
+
+    background-color: transparent !important;
+  }
+
+  body .table{
+
+    background-color: transparent !important;
+  }
+
+  body .page-link{
+
+    background-color: transparent !important;
+  }

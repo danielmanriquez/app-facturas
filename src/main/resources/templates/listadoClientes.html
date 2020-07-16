@@ -7,34 +7,53 @@
 
 
     <section id="listadoClientes">
-      <div class="container">
+      <div class="container my-4 text-center">
         <div class="row">
-          <div class="col-xs-12">
-            <table class="table table-dark">
+          <div class="col-xs-12 mx-auto">
+
+
+            <table class="table table-borderless">
               <thead>
-                <tr class="text-secondary">
+                <tr class="text-dark">
                   <th>[[#{cliente.idCliente}]]</th>
-                  <th>[[#{cliente.nombre}]]</th>
-                  <th>[[#{cliente.apellido}]]</th>
-                  <th>[[#{cliente.email}]]</th>
-                  <th>[[#{cliente.creadoEn}]]</th>
-                  <th>[[#{cliente.opciones}]]</th>
+                  <th>
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    [[#{cliente.nombre}]]
+
+                  </th>
+                  <th>
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    [[#{cliente.email}]]
+
+                  </th>
+                  <th>
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                    [[#{cliente.opciones}]]
+                  
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 <tr th:each="cliente: ${listadoClientes}">
                   <td>
-                    <a th:href="@{/cliente/verDetalle}+'/'+${cliente.idCliente}" class="btn btn-primary btn-xs">[[${cliente.idCliente}]]</a>
+                    <a th:href="@{/cliente/verDetalle}+'/'+${cliente.id}" class="btn btn-primary btn-xs">[[${cliente.id}]]</a>
                   </td>
-                  <td>[[${cliente.nombre}]]</td>
-                  <td>[[${cliente.apellido}]]</td>
+                  <td>[[${cliente.nombreCompleto}]]</td>
                   <td>[[${cliente.email}]]</td>
-                  <td>[[${cliente.fechaCreacion}]]</td>
                   <td>
                     
-                    <a th:href="@{/factura/formularioFactura}+'/'+${cliente.idCliente}" class="badge badge-warning">[[#{menu.factura}]]</a>
-                    <a th:href="@{/cliente/editarCliente}+'/'+${cliente.idCliente}" class="badge badge-info">[[#{menu.editar}]]</a>
-                    <a th:href="@{/cliente/eliminarCliente}+'/'+${cliente.idCliente}" class="badge badge-danger">[[#{menu.eliminar}]]</a>
+                    <a th:href="@{/factura/formularioFactura}+'/'+${cliente.id}" class="badge badge-warning">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      [[#{menu.factura}]]
+                    </a>
+                    <a th:href="@{/cliente/editarCliente}+'/'+${cliente.id}" class="badge badge-info">
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                      [[#{menu.editar}]]
+                    </a>
+                    <a th:href="@{/cliente/eliminarCliente}+'/'+${cliente.id}" class="badge badge-danger">
+                      <i class="fa fa-user-times" aria-hidden="true"></i>
+                      [[#{menu.eliminar}]]
+                    </a>
 
                   </td>
                 </tr>

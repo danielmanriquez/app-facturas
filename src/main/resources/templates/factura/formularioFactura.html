@@ -14,7 +14,7 @@
           <div class="card-header">[[#{titulo.factura}]]</div>
           <div class="card-body">
             <h4 class="card-title">
-              <a th:href="@{/cliente/verDetalle}+'/'+${factura.cliente.idCliente}" class="btn btn-success">[[#{menu.volver}]]</a>
+              <a th:href="@{/cliente/verDetalle}+'/'+${factura.cliente.id}" class="btn btn-success">[[#{menu.volver}]]</a>
 
             </h4>
             <form th:action="@{/factura/guardarFactura}" th:object="${factura}" method="post">

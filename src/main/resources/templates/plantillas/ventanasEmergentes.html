@@ -1,0 +1,80 @@
+
+<html xmlns="http://www.thymeleaf.org">
+<head>
+    <title>VENTANAS EMERGENTES</title>
+</head>
+<body>
+    <section th:fragment="ventanasEmergentes">
+
+        
+        <div class="modal fade" id="mostrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" th:if="${success != null}">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content bg-secondary text-success border-success">
+                <div class="modal-header border-success">
+                  <h5 class="modal-title" id="exampleModalLabel">[[#{ventana.success}]]</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body border-success">
+                  [[${success}]]
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="mostrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" th:if="${info != null}">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content bg-secondary text-info border-info">
+                <div class="modal-header border-info">
+                  <h5 class="modal-title" id="exampleModalLabel">[[#{ventana.info}]]</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body border-info">
+                  [[${info}]]
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="mostrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" th:if="${error != null}">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content bg-secondary text-danger border-danger">
+                <div class="modal-header border-danger">
+                  <h5 class="modal-title" id="exampleModalLabel">[[#{ventana.error}]]</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body border-danger">
+                  [[${error}]]
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="mostrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" th:if="${warning != null}">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content bg-secondary text-warning border-warning">
+                <div class="modal-header border-warning">
+                  <h5 class="modal-title" id="exampleModalLabel">[[#{ventana.warning}]]</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body border-warning">
+                  [[${warning}]]
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        
+    </section>
+</body>

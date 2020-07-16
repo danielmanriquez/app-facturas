@@ -14,7 +14,7 @@
 
             <h4 class="card-title">
 
-              <a th:href="@{'/cliente/verDetalle/' + ${factura.cliente.idCliente}}">[[#{menu.volver}]]</a>
+              <a th:href="@{'/cliente/verDetalle/' + ${factura.cliente.id}}">[[#{menu.volver}]]</a>
 
             </h4>
 
@@ -26,7 +26,7 @@
 
             <ul class="list-group" id="datosFactura">
               <li class="list-group-item list-group-item-success">[[#{factura.datos}]]</li>
-              <li class="list-group-item">[[#{factura.folio}]] :  [[${factura.idFactura}]]</li>
+              <li class="list-group-item">[[#{factura.folio}]] :  [[${factura.id}]]</li>
               <li class="list-group-item">[[#{factura.descripcion}]] :  [[${factura.descripcion}]]</li>
               <li class="list-group-item">[[#{factura.fecha}]] :  [[${factura.fechaCreacion}]]</li>
 

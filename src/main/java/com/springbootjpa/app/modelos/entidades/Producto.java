@@ -26,27 +26,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "productos")
-public class Producto implements Serializable {
+public class Producto extends EntidadAbstracta {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_producto")
-    private Long idProducto;
-
+    @Column(name ="nombre")
     private String nombre;
-
+    
+    @Column(name="precio")
     private Double precio;
     
-    
-    @Temporal(TemporalType.DATE)
-    @Column(name="fecha_creacion")
-    private Date fechaCreacion;
-    
-    @PrePersist
-     public void antesDePersistir(){
-         
-         this.fechaCreacion = new Date();
-         
-     }
 
 }

@@ -35,7 +35,7 @@ public class ClienteDAOImpl implements ClienteDAO {
     @Override
     public void save(Cliente cliente) {
 
-        if (cliente.getIdCliente() != null && cliente.getIdCliente() > 0) {
+        if (cliente.getId()!= null && cliente.getId()> 0) {
 
             em.merge(cliente);
         } else {

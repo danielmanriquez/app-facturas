@@ -16,7 +16,7 @@
           
           <div class="card-header">[[#{titulo.ver}]]</div>
           <div class="card-body">
-            <h4><a th:href="@{/factura/formularioFactura}+'/'+${cliente.idCliente}" class="btn btn-primary">[[#{menu.factura}]]</a></h4>
+            <h4><a th:href="@{/factura/formularioFactura}+'/'+${cliente.id}" class="btn btn-primary">[[#{menu.factura}]]</a></h4>
             <img th:if="${#strings.length(cliente.foto) > 0}" class="img-thumbnail rounded float-left" style="max-width: 25%;" th:src="@{'/cliente/uploads/' + ${cliente.foto}}" th:alt="${cliente.nombre}"/>
 
             <ul class="list-group">
@@ -44,13 +44,13 @@
               <tbody>
                 <tr th:each="factura: ${cliente.facturas}">
 
-                  <td>[[${factura.idFactura}]]</td>
+                  <td>[[${factura.id}]]</td>
                   <td>[[${factura.descripcion}]]</td>
                   <td>[[${factura.fechaCreacion}]]</td>
                   <td>[[${factura.total}]]</td>
-                  <td><a th:href="@{'/factura/verFactura/' + ${factura.idFactura}}" class="btn btn-primary">[[#{menu.verDetalle}]]</a></td>
+                  <td><a th:href="@{'/factura/verFactura/' + ${factura.id}}" class="btn btn-primary">[[#{menu.verDetalle}]]</a></td>
                   <td>
-                    <a th:href="@{'/factura/borrarFactura/' + ${factura.idFactura}}"
+                    <a th:href="@{'/factura/borrarFactura/' + ${factura.id}}"
                        class="btn btn-danger"
                          onclick="return confirm('Seguro Que desea Eliminar la Factura?');">
                       [[#{menu.eliminar}]]

@@ -151,8 +151,8 @@ public class ClienteControlador {
 
         if (!foto.isEmpty()) {
 
-            if (cliente.getIdCliente() != null
-                    && cliente.getIdCliente() > 0
+            if (cliente.getId() != null
+                    && cliente.getId() > 0
                     && cliente.getFoto() != null
                     && cliente.getFoto().length() > 0) {
 
@@ -199,7 +199,6 @@ public class ClienteControlador {
         }
 
         model.addAttribute("cliente", clienteTemporal);
-        model.addAttribute("titulo", "editarCliente");
 
         return "agregarCliente";
 
@@ -223,7 +222,7 @@ public class ClienteControlador {
             this.clienteServicio.eliminarCliente(idCliente);
             if(subirArchivoServicio.borrarImagen(cliente.getFoto())){
             
-                flash.addFlashAttribute("success", "Foto del cliente eliminada con exito");
+                flash.addFlashAttribute("success", "Cliente y foto eliminados con exito");
                 
             }
             

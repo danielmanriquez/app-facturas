@@ -6,7 +6,11 @@ import java.util.List;
 
 public interface ProductoServicio {
     
+    public List<Producto> listarTodosLosProducto();
+    
     public List<Producto> buscarProductoPorNombre(String nombre);
     
     public Producto buscarProductoPorId(Long id );
+    
+    
 }

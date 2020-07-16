@@ -31,20 +31,14 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "items_factura")
-public class ItemFactura implements Serializable {
+public class ItemFactura extends EntidadAbstracta{
     
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id_item_factura")
-    private Long idItemFactura ;
     
     @Column(name="cantidad")
     private Integer cantidad ;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_producto")
+    @JoinColumn(name="producto_id")
     private Producto producto;
     
     /**

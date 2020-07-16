@@ -16,7 +16,7 @@ $(document).ready( function () {
 
                                 return {
 
-                                    value: item.idProducto,
+                                    value: item.id,
                                     label: item.nombre,
                                     precio: item.precio
 

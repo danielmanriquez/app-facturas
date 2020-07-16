@@ -32,19 +32,14 @@ import org.springframework.format.annotation.DateTimeFormat;
  * 
  * @author Daniel Manriquez
  */
+
 @AllArgsConstructor
 @Data
 @Entity
 @Table(name = "clientes")
-public class Cliente implements Serializable {
+public class Cliente extends EntidadAbstracta {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @Column(name = "id_cliente")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCliente;
-    
     
     @NotBlank
     @Column(name = "nombre")
@@ -58,11 +53,6 @@ public class Cliente implements Serializable {
     @Email
     @Column(name = "email")
     private String email;
-    
-    @Column(name = "fecha_creacion")
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date fechaCreacion;
     
     @Column(name = "foto")
     private String foto;
@@ -84,18 +74,6 @@ public class Cliente implements Serializable {
         this.facturas.add(factura);
         
     }
-    
-    /**
-     *Metodo que se ejecuta justo antes de persistir en la base de datos  , le asigna la fecha actual al objeto fechaCreacion y luego lo guarda.
-     * 
-     * 
-     */
-    @PrePersist
-     public void antesDePersistir(){
-         
-         fechaCreacion = new Date();
-         
-     }
      
     public String getNombreCompleto(){
     
