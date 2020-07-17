@@ -4,6 +4,8 @@ import com.springbootjpa.app.modelos.daos.IProductoDAO;
 import com.springbootjpa.app.modelos.entidades.Producto;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +19,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     
     @Transactional(readOnly = true)
     @Override
-    public List<Producto> listarTodosLosProducto() {
+    public List<Producto> listarTodosLosProductos() {
         
         return this.productoDao.findAll();
         
@@ -37,6 +39,22 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         return this.productoDao.findById(id).orElse(null);
 
+    }
+    
+    @Transactional(readOnly = true)
+    @Override
+    public Page<Producto> listarTodosLosProductos(Pageable pageable) {
+        
+        return this.productoDao.findAll(pageable);
+        
+        
+    }
+    
+    @Transactional
+    @Override
+    public void guardarProducto(Producto producto) {
+        
+        this.productoDao.save(producto);
     }
 
     

@@ -33,7 +33,7 @@ public class EntidadAbstracta {
     private Long id;
     
     @CreatedDate
-    @Column(name = "fecha_creacion"  , nullable = false)
+    @Column(name = "fecha_creacion")
     @JsonIgnore
     private Date fechaCreacion ; 
     

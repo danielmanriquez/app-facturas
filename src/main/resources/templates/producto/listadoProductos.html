@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantillas/plantillaCssScript :: headCssScript">
+  <title>LISTADO PRODUCTOS</title>
+</head>
+
+<body>
+
+  <section th:replace="plantillas/plantillaGeneral :: navbar"></section>
+  <section th:replace="producto/agregarProducto :: modalAgregarProducto"></section>
+
+  <section id="listadoClientes">
+    <div class="container-fluid my-4 text-center mb-5">
+      <div class="row">
+        <div class="col-xs-12 mx-auto">
+
+          <button type="button" class="btn btn-dark btn-xs mb-4" data-toggle="modal" data-target="#modalAgregarProducto" id="limpiarModal">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            [[#{producto.agregarProducto}]]
+          </button>
+
+          <table class="table bg-dark text-secondary">
+            <thead>
+              <tr class=>
+                <th>[[#{producto.id}]]</th>
+                <th>
+                  <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                  [[#{producto.nombre}]]
+
+                </th>
+                <th>
+                  <i class="fa fa-money" aria-hidden="true"></i>
+                  [[#{producto.precio}]]
+
+                </th>
+                <th>
+                  <i class="fa fa-cog" aria-hidden="true"></i>
+                  [[#{producto.opciones}]]
+
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="producto: ${listadoProductos}">
+                <td>[[${producto.id}]]</td>
+                <td>[[${producto.nombre}]]</td>
+                <td>$ [[${producto.precio}]]</td>
+                <td>
+
+                  <button id="editar" type="button" class="badge badge-info" data-toggle="modal"
+                    data-target="#modalAgregarProducto" th:data-id="${producto.id}" th:data-nombre="${producto.nombre}"
+                    th:data-precio="${producto.precio}">
+                    <i class="fa fa-pencil" aria-hidden="true" onclick="editar(this);"></i>
+                    [[#{producto.editar}]]
+                  </button>
+
+
+                  <a href="#" class="badge badge-danger">
+                    <i class="fa fa-user-times" aria-hidden="true"></i>
+                    [[#{menu.eliminar}]]
+                  </a>
+
+                </td>
+              </tr>
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <nav th:replace="plantillas/paginatorNav :: paginator"></nav>
+
+
+
+
+  <section th:replace="plantillas/plantillaGeneral :: footer"></section>
+  <script>
+
+    $(document).on("click", "#editar", function () {
+      var id = $(this).data('id');
+      console.log("El valor de id es" + id);
+      var nombre = $(this).data('nombre');
+      console.log("El valor de nombre es" + nombre);
+
+      var precio = $(this).data('precio');
+      console.log("El valor de precio es" + precio);
+
+      $(".modal-content #idProducto").val(id);
+      $(".modal-body #nombre").val(nombre);
+      $(".modal-body #precio").val(precio);
+
+      $('#modalAgregarProducto').modal('show');
+    });
+
+
+    $(document).on("click", "#limpiarModal", function () {
+      
+      $(".modal-content #idProducto").val(null);
+      $(".modal-body #nombre").val(null);
+      $(".modal-body #precio").val(null);
+
+      $('#modalAgregarProducto').modal('show');
+    });
+
+
+
+  </script>
+
+</body>
+
+</html>
